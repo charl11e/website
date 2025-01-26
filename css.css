@@ -1,0 +1,26 @@
+/* Navbar */
+.navbar {
+    background-color:deepskyblue;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 22px;
+    color: white;
+}
+
+.nav-link {
+    color: rgb(223, 242, 251);
+    font-size: 18px;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.navbar-nav .nav-item .nav-link.active {
+    color: white;
+    font-weight: bold;
+}
