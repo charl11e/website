@@ -45,6 +45,38 @@ async function loadNavbar() {
 };
 loadNavbar();
 
+// Load project cards if applicable
+async function loadProjects() {
+    if (document.location.pathname == "/projects.html") {
+        try {
+            const projectCards = document.getElementById("project-cards");
+            const projects = await getProjects();
+            let projectHTML = "";
+            console.log(projects);
+            for (const project of projects) {
+                const tagsHTML = project.tags.map(tag => `<span class="badge">${tag}</span>`).join("");
+
+                projectHTML += `
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="/assets/${project.image}" class="card-img-top" alt="${project.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${project.title}</h5>
+                            <p class="card-text">${project.description}</p>
+                            <a href="${project.link}" target="_blank"><i class="bi bi-github"></i></a>
+                            <span class="bottom-right">${tagsHTML}</span>
+                        </div>
+                    </div>
+                </div>`
+            };
+            projectCards.innerHTML = projectHTML;
+        } catch (e) {
+            console.error("Error loading project cards: ", e);
+        }
+    };
+};
+loadProjects();
+
 // Theme switcher  // TODO: Need to implement different theme styling & implement auto detect user's settings
 function setTheme(theme) {
     document.body.classList.remove("light-mode", "dark-mode");
@@ -57,15 +89,13 @@ function setTheme(theme) {
     document.getElementById(theme.split("-")[0] + "-toggle").classList.add("active");
 };
 
-// Load projects
+// Get projects
 async function getProjects() {
     try {
         let response = await fetch("/projects.json");
         const projects = await response.json();
-        console.log(projects);
+        return projects;
     } catch(e) {
-        console.error("Error loading projects: ", e);
+        console.error("Error fetching projects: ", e);
     }
 };
-
-getProjects();

@@ -38,3 +38,18 @@
 .navbar-nav .nav-item .dropdown-toggle.show {
     color: white;
 }
+
+/* Main content */
+.center-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 2%;
+}
+
+.bottom-right {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px; /* Optional: Add some padding */
+}
