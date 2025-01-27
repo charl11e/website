@@ -4,7 +4,7 @@ async function loadNavbar() {
 
         // Emphasise the current page
         const navbar = document.getElementById("navbar-placeholder");
-        const response = await fetch("/navbar.html");
+        let response = await fetch("/navbar.html");
         const navbarHTML = await response.text();
         navbar.innerHTML = navbarHTML;
 
@@ -45,7 +45,7 @@ async function loadNavbar() {
 };
 loadNavbar();
 
-// Theme switcher
+// Theme switcher  // TODO: Need to implement different theme styling & implement auto detect user's settings
 function setTheme(theme) {
     document.body.classList.remove("light-mode", "dark-mode");
     document.body.classList.add(theme);
@@ -55,8 +55,17 @@ function setTheme(theme) {
     document.getElementById("dark-toggle").classList.remove("active");
     document.getElementById("auto-toggle").classList.remove("active");
     document.getElementById(theme.split("-")[0] + "-toggle").classList.add("active");
+};
 
-    if (theme == "auto-mode") {
-        console.log("need to implement");
+// Load projects
+async function getProjects() {
+    try {
+        let response = await fetch("/projects.json");
+        const projects = await response.json();
+        console.log(projects);
+    } catch(e) {
+        console.error("Error loading projects: ", e);
     }
-}
+};
+
+getProjects();
