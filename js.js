@@ -16,13 +16,7 @@ async function loadNavbar() {
             };
         };
 
-        // Load user's saved theme if applicable
-        const theme = localStorage.getItem("theme");
-        if (theme) {
-            setTheme(theme);
-        } else {
-            setTheme("auto");
-        };
+        // Add event listeners for theme togglers
 
         // Switch to light mode
         document.getElementById("light-toggle").addEventListener("click", function() {
@@ -43,7 +37,48 @@ async function loadNavbar() {
         console.error("Error loading navbar: ", e);
     };
 };
-loadNavbar();
+
+// Load user's saved theme
+async function loadTheme() {
+    const theme = localStorage.getItem("theme");
+    if (theme) {
+        setTheme(theme);
+    } else {
+        setTheme("auto");
+    };
+};
+
+// Theme switcher
+function setTheme(theme) {
+    document.documentElement.setAttribute("data-bs-theme", theme);
+    localStorage.setItem("theme", theme);
+
+    document.getElementById("light-toggle").classList.remove("active");
+    document.getElementById("dark-toggle").classList.remove("active");
+    document.getElementById("auto-toggle").classList.remove("active");
+    document.getElementById(theme + "-toggle").classList.add("active");
+
+    if (theme == "auto") {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute("data-bs-theme", "dark");
+        } else {
+            document.documentElement.setAttribute("data-bs-theme", "light");
+        };
+    };
+};
+
+// Detect when user changes theme if set to auto mode
+function detectThemeChange() {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (localStorage.getItem("theme") == "auto") {
+            if (e.matches) {
+                document.documentElement.setAttribute("data-bs-theme", "dark");
+            } else {
+                document.documentElement.setAttribute("data-bs-theme", "light");
+            };
+        };
+    });
+};
 
 // Load project cards if applicable
 async function loadProjects() {
@@ -74,37 +109,6 @@ async function loadProjects() {
         }
     };
 };
-loadProjects();
-
-// Theme switcher
-function setTheme(theme) {
-    document.documentElement.setAttribute("data-bs-theme", theme);
-    localStorage.setItem("theme", theme);
-
-    document.getElementById("light-toggle").classList.remove("active");
-    document.getElementById("dark-toggle").classList.remove("active");
-    document.getElementById("auto-toggle").classList.remove("active");
-    document.getElementById(theme + "-toggle").classList.add("active");
-
-    if (theme == "auto") {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.setAttribute("data-bs-theme", "dark");
-        } else {
-            document.documentElement.setAttribute("data-bs-theme", "light");
-        };
-    };
-};
-
-// Detect when user changes theme if set to auto mode
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (localStorage.getItem("theme") == "auto") {
-        if (e.matches) {
-            document.documentElement.setAttribute("data-bs-theme", "dark");
-        } else {
-            document.documentElement.setAttribute("data-bs-theme", "light");
-        };
-    };
-});
 
 // Get projects
 async function getProjects() {
@@ -116,3 +120,17 @@ async function getProjects() {
         console.error("Error fetching projects: ", e);
     }
 };
+
+async function load() {
+    try {
+        await loadNavbar();
+        await loadTheme();
+        detectThemeChange();
+        await loadProjects();
+    }
+    catch(e) {
+        console.error("Error loading: ", e);
+    };
+}
+
+load();
