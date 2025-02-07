@@ -26,17 +26,17 @@ async function loadNavbar() {
 
         // Switch to light mode
         document.getElementById("light-toggle").addEventListener("click", function() {
-            setTheme("light-mode");
+            setTheme("light");
         });
 
         // Switch to dark mode
         document.getElementById("dark-toggle").addEventListener("click", function() {
-            setTheme("dark-mode");
+            setTheme("dark");
         });
 
         // Switch to auto mode
         document.getElementById("auto-toggle").addEventListener("click", function() {
-            setTheme("auto-mode");
+            setTheme("auto");
         });
 
     } catch(e) {
@@ -52,7 +52,6 @@ async function loadProjects() {
             const projectCards = document.getElementById("project-cards");
             const projects = await getProjects();
             let projectHTML = "";
-            console.log(projects);
             for (const project of projects) {
                 const tagsHTML = project.tags.map(tag => `<span class="badge">${tag}</span>`).join("");
 
@@ -77,17 +76,35 @@ async function loadProjects() {
 };
 loadProjects();
 
-// Theme switcher  // TODO: Need to implement different theme styling & implement auto detect user's settings
+// Theme switcher
 function setTheme(theme) {
-    document.body.classList.remove("light-mode", "dark-mode");
-    document.body.classList.add(theme);
+    document.documentElement.setAttribute("data-bs-theme", theme);
     localStorage.setItem("theme", theme);
 
     document.getElementById("light-toggle").classList.remove("active");
     document.getElementById("dark-toggle").classList.remove("active");
     document.getElementById("auto-toggle").classList.remove("active");
-    document.getElementById(theme.split("-")[0] + "-toggle").classList.add("active");
+    document.getElementById(theme + "-toggle").classList.add("active");
+
+    if (theme == "auto") {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute("data-bs-theme", "dark");
+        } else {
+            document.documentElement.setAttribute("data-bs-theme", "light");
+        };
+    };
 };
+
+// Detect when user changes theme if set to auto mode
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (localStorage.getItem("theme") == "auto") {
+        if (e.matches) {
+            document.documentElement.setAttribute("data-bs-theme", "dark");
+        } else {
+            document.documentElement.setAttribute("data-bs-theme", "light");
+        };
+    };
+});
 
 // Get projects
 async function getProjects() {
