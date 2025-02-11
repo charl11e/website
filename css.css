@@ -75,10 +75,10 @@
 /* Module accordions */
 .modules {
     margin-top: 2%;
-    height: 800px;
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
+    margin-bottom: 2%;
 }
 
 .accordion-button:not(.collapsed) {
