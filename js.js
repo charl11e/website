@@ -93,11 +93,11 @@ async function loadProjects() {
                 projectHTML += `
                 <div class="col">
                     <div class="card h-100">
-                        <img src="/assets/${project.image}" class="card-img-top" alt="${project.title}">
-                        <div class="card-body">
+                        <img src="/assets/${project.image}" class="card-img-top project-image" alt="${project.title}">
+                        <div class="card-body project-card">
                             <h5 class="card-title">${project.title}</h5>
                             <p class="card-text">${project.description}</p>
-                            <a href="${project.link}" target="_blank"><i class="bi bi-github"></i></a>
+                            <a href="${project.link}" target="_blank"><i class="project-link bi bi-github"></i></a>
                             <div class="bottom-right">${tagsHTML}</div>
                         </div>
                     </div>
