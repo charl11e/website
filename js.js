@@ -98,7 +98,7 @@ async function loadProjects() {
                             <h5 class="card-title">${project.title}</h5>
                             <p class="card-text">${project.description}</p>
                             <a href="${project.link}" target="_blank"><i class="bi bi-github"></i></a>
-                            <span class="bottom-right">${tagsHTML}</span>
+                            <div class="bottom-right">${tagsHTML}</div>
                         </div>
                     </div>
                 </div>`
