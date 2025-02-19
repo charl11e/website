@@ -9,7 +9,7 @@
     {
         "title": "Meal Magic",
         "description": "This was a university assignment that involved creating a REST API using Node.js and Express, and a front-end using HTML, CSS and JavaScript. My project allowed users to add/manage their ingredients and their recipes with an ability to search for recipes based on ingredients they currently had in. The GitHub repository also includes API documentation and a video demonstration of the project, as it is currently not hosted.",
-        "tags": ["HTML", "CSS", "JS", "Node.js", "Express", "API", "University"],
+        "tags": ["HTML", "CSS", "JS", "Node.js", "API", "University"],
         "link": "https://github.com/charl11e/meal-magic",
         "image": "mealmagic.png"
     },
