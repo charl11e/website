@@ -1,7 +1,7 @@
 [
     {
         "title": "Website",
-        "description": "I made this website to showcase myself, my projects and my skills. It was made using HTML, CSS and JavaScript with the Bootstrap framework and is hosted on GitHub Pages.",
+        "description": "I made this website to showcase myself, my projects and my skills. It was made using HTML, CSS and JavaScript using Bootstrap and is hosted on GitHub Pages.",
         "tags": ["HTML", "CSS", "JS", "Personal"],
         "link": "https://github.com/charl11e/website",
         "image": "website.png"
@@ -9,15 +9,22 @@
     {
         "title": "Meal Magic",
         "description": "This was a university assignment that involved creating a REST API using Node.js and Express, and a front-end using HTML, CSS and JavaScript. My project allowed users to add/manage their ingredients and their recipes with an ability to search for recipes based on ingredients they currently had in. The GitHub repository also includes API documentation and a video demonstration of the project, as it is currently not hosted.",
-        "tags": ["HTML", "CSS", "JS", "Node.js", "API", "University"],
+        "tags": ["HTML", "CSS", "JS", "Node.js", "University"],
         "link": "https://github.com/charl11e/meal-magic",
         "image": "mealmagic.png"
     },
     {
         "title": "SAT Solver",
-        "description": "This was a university assignment that involved creating a DPLL SAT solver in Python. This involved loading a DIMACS CNF file, unit propagation and branching on variables using a heuristic designed by myself. I plan to expand on this further by porting this code to Java, improving the heuristic and adding a GUI to create a sudoku solver.",
+        "description": "This was a university assignment that involved creating a DPLL SAT solver in Python. This involved loading a DIMACS CNF file, unit propagation and branching on variables using a heuristic designed by myself. I ported the code to Java to help me learn Java, and built a simple (but massively inefficient) sudoku solver with a Swing GUI to demonstrate one of the uses of SAT solvers.",
         "tags": ["Python", "Java", "University", "Personal"],
         "link": "https://github.com/charl11e/sat-solver",
         "image": "sat.png"
+    },
+    {
+        "title": "Videogame Tracker",
+        "description": "This is a personal project that I created to track my game collection. It was built with a React frontend and Spring Boot backend, and is designed to run locally either natively or using Docker. It includes support for multiple users, filtering games, uploading game cover art and tracking progress.",
+        "tags": ["React", "Spring Boot", "Docker", "Personal"],
+        "link": "https://github.com/charl11e/videogame-tracker",
+        "image": "gametracker.png"
     }
 ]
